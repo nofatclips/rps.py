@@ -1,4 +1,6 @@
 from sign import Sign
+import inspect
+import re
 
 class Game(object):
     
@@ -8,10 +10,10 @@ class Game(object):
     
     def __init__(self, *signs):
         self.callbacks = {
-  		"playerOneWins": [],
-			"playerTwoWins": [],
-			"nobodyWins": []
-		}
+		"playerOneWins": [],
+		"playerTwoWins": [],
+		"nobodyWins": []
+        }
         self.signs = {}
         for s in signs:
             sign = Sign(s)
@@ -19,7 +21,14 @@ class Game(object):
             self.signs[sign.name] = sign
         
     def setRules(self, callback):
-        eval(callback, self.signs)
+        if not type(callback) is str:
+            callback = str(inspect.getsource(callback))
+            removeHeader = r"^.*def.*\:\s*"
+            callback = re.sub(removeHeader, "", callback)
+        else:
+            removeLineBreak = r"\s+\."
+            callback = re.sub(removeLineBreak, ".", callback.strip())
+        # eval(callback, self.signs)
         return self
     
     def whoWins(self, firstSign, secondSign):
