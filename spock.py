@@ -8,17 +8,19 @@ def declareP2Winner(p1Sign, p2Sign):
     
 def callItADraw(p1Sign, p2Sign):
     print ("It's draw between %s and %s" % (p1Sign, p2Sign))
+    
+def rulesForRockPaperScissorsLizardSpock():
+    scissors \
+        .beats(paper, lizard) \
+        .beats(spock, paper) \
+        .beats(rock, spock) \
+        .beats(scissors, rock) \
+        .beats(lizard, scissors)
 
 rpsls = Game ("rock", "paper", "scissors", "lizard", "spock") \
-    .setRules("""
-        scissors \
-            .beats(paper, lizard) \
-            .beats(spock, paper) \
-            .beats(rock, spock) \
-            .beats(scissors, rock) \
-            .beats(lizard, scissors)""") \
-            .whenPlayerOneWins(declareP1Winner) \
-            .whenPlayerTwoWins(declareP2Winner) \
-            .whenPlayersDraw(callItADraw) \
+    .setRules(rulesForRockPaperScissorsLizardSpock) \
+    .whenPlayerOneWins(declareP1Winner) \
+    .whenPlayerTwoWins(declareP2Winner) \
+    .whenPlayersDraw(callItADraw) \
 
 rpsls.whoWins("lizard", "spock")
