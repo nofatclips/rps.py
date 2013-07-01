@@ -10,7 +10,6 @@ def callItADraw(p1Sign, p2Sign):
     print ("It's draw between %s and %s" % (p1Sign, p2Sign))
 
 rpsls = Game ("rock", "paper", "scissors", "lizard", "spock") \
-    .setRules(rules) \
     .setRules("""
         scissors \
             .beats(paper, lizard) \
